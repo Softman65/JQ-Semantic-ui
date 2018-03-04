@@ -1,0 +1,109 @@
+﻿/*/
+            .id
+            .idAds
+            .content
+            .title
+            .tags
+            .name
+            .category
+            .location
+            .createdAt
+            .updatedAt
+            .IdAgency
+            .age
+            .rates
+            .CreditCard
+            .verifyPhotos
+            .serviceTimeMin
+            .serviceRateMin
+            .state
+            .city
+            .zone
+            .url0
+            .url1
+            .url2
+
+        /*/
+
+.red{
+    color:red;
+}
+.activate {
+    color: darkred;
+}
+
+.idAds {
+    width: 25px;
+}
+
+
+.field.title {
+    width: 75%;
+    overflow-wrap: break-word;
+}
+.Fcontent {
+    overflow-wrap: break-word;
+}
+
+.Ftitle {
+    font-weight: bold;
+}
+.Ftags {
+    font-size: 0.75em;
+}
+
+.name {
+    width: 20px;
+}
+
+.category {
+}
+
+.location {
+    display: none;
+}
+
+.createdAt {
+}
+
+.updatedAt {
+}
+
+.IdAgency {
+}
+
+.age {
+}
+
+.rates {
+}
+
+.CreditCard {
+}
+
+.verifyPhotos {
+}
+
+.serviceTimeMin {
+}
+
+.serviceRateMin {
+}
+
+.state {
+}
+
+.city {
+}
+
+.zone {
+}
+
+.url0 {
+}
+
+.url1 {
+}
+
+.url2 {
+}
