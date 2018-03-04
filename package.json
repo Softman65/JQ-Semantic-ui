@@ -1,0 +1,27 @@
+{
+  "name": "jq-semantic-ui",
+  "version": "0.0.1",
+  "description": "plugin jquery para crear objetos semantic-ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Softman65/JQ-Semantic-ui.git"
+  },
+  "keywords": [
+    "JQuery",
+    "objects",
+    "Semantic.ui"
+  ],
+  "author": "Ricardo Benitez",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Softman65/JQ-Semantic-ui/issues"
+  },
+  "homepage": "https://github.com/Softman65/JQ-Semantic-ui#readme",
+  "dependencies": {
+    "lodash": "^4.17.5"
+  }
+}
