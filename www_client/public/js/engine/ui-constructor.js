@@ -3,44 +3,80 @@
     $.fn.semantic = function (options, _key) {
 
         const _ret = {
+            ordinals:['cero','one','two','three','four','five','six','seven'],
             constructor: $(this).UI_html(options),
             push:function(obj, _key){
-                this.objects[obj[0].id.replace("#","")] = obj
+                if(options._.isString(obj)){
+                    this.objects[obj] = $(obj)
+                }else{
+                    this.objects[obj[0].id.replace("#","")] = obj
+                }
                 return this
             },
-            iteration:function(_this,_obj, $parent ){
-                var _ret = $parent
-                options._.forEach(_obj, function(_v,_k){
-                    if(_k=="append"){
-                        var _func = ""
-                        var _params = {}
-                        var _events = null
-                        var _css = ""
-                        options._.forEach(_v, function(_value,_name){
-                            if(_name!="events"){
-                                if(_name=="obj"){
-                                    _func = _name
-                                }else{
-                                    if(_name.indexOf('css')>-1){
-                                        _css= _css + ' ' + (_name=='extracss'?'+':'') + _value  
-                                    }else{
-                                        _params[_name]=_value
-                                    }
-                                }
-                            }else{
-                                _events = _value
-                            }
-                        })
-                        $parent.append(_this.atachEvents( _v[_func](_params, _css) , _events ))
-                    }
+            complete:function(_this, _obj,_params,_css){
+                options._.forEach(_params,function(_e,_k){
+                    if(_k!='html' && _k!='content')
+                       _obj.attr(_k,_e) 
                 })
-                return $parent.html()
+                if(_css.length>0)
+                    _obj.addClass(_css?_css.replace('+',' '):'')
+
+                if(_params!=null){
+                    _obj.html(_params.html?_params.html:'')
+                   if(_params.content!=null)
+                        options._.forEach(_params.content,function(_elem){
+                            _this.iterator(_this,_elem, _obj )
+                        })
+                }
+
+                return _obj
+            },
+            iterator:function(_this, _elem , $parent ){
+                var _ret = $parent
+                //debugger
+
+                var _func = ""
+                var _params = {}
+                var _events = null
+                var _css = ""
+               // if(obj.fields){
+               //     debugger
+               // }else{
+                    options._.forEach(_elem, function(_value,_name){
+
+                        if(_name!="events"){
+                            if(_name=="obj"){
+                                _func = _value
+                            }else{
+                                if(_name.indexOf('css')>-1){
+                                    _css= _css + ' ' + (_name=='extracss'?'+':'') + _value  
+                                }else{
+                                    _params[_name]=_value
+                                }
+                            }
+                        }else{
+                            _events = _value
+                        }
+                        
+
+                    })
+               // }
+                //if(_type=="append"){
+                    $parent.append(_this.atachEvents( _func(_this, _params, _css) , _events ))
+                //}
+
+                
             },
             html:function( _def ){
-                const _this = this                
-                options._.forEach(_def, function(_v,_k){
-                    _this.objects[_k].empty()
-                    _this.iteration( _this, _v, _this.objects[_k] )
+                const _this = this  
+                options._.forEach(_def, function(_array,_name){ 
+                    const $parent = _this.objects[_name].empty()  
+                    options._.forEach(_array, function(_elem){              
+                        //options._.forEach(_elem, function(_v,_k){
+                           
+                            _this.iterator( _this, _elem , $parent )
+                        //})
+                    })
                 })
             },
             atachEvents:function(object, events){
@@ -54,7 +90,7 @@
             }
         }
         
-        return _ret.push(this,_key)
+        return _ret.push( this[0].id.length==0 ? 'body' : this )
     };
 
 }(jQuery));

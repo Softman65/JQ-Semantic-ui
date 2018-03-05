@@ -1,43 +1,84 @@
 $( document ).ready(function() {
-    //debugger
-    String.prototype.replaceAll = function (target, replacement) {
-        return this.split(target).join(replacement);
-    };
-
-
-
 
     const App = {
         _:_,
         init: function (app) {
-            app.semantic = $('#one').semantic(app,'#one')
-            app.semantic.push($('#two'))
+            app.semantic = $('body').semantic(app) //.push( $('#one') ).push( $('#two') )
+            
 
             const UIMap ={
-                one : { 
-                    append: { 
-                        obj: app.semantic.constructor.button.standard ,
-                        text:'hi 1',
-                        events:{
-                            click:function(){
-                                alert('hi 1')
+                body :[ 
+                    { 
+                        obj: app.semantic.constructor.segment ,
+                        extracss: 'raised',
+                        content:[ 
+                            {   obj: app.semantic.constructor.forms.constructor,
+                                content:[
+                                    { obj:app.semantic.constructor.h4 , css:'ui dividing header', html:'Datos Personales'},
+                                    { obj: app.semantic.constructor.forms.field , 
+                                        content:[
+                                            { obj: app.semantic.constructor.label , html: 'nombre' }, 
+                                            { obj: app.semantic.constructor.forms.fields,
+                                                content:[
+                                                    { obj: app.semantic.constructor.forms.field , 
+                                                        content:[
+                                                            { obj: app.semantic.constructor.forms.input.text ,name:'uno' , placeholder: 'nombre' }
+                                                        ]
+                                                    },
+                                                    { obj: app.semantic.constructor.forms.field , 
+                                                        content:[
+                                                            { obj: app.semantic.constructor.forms.input.text ,name:'uno' , placeholder: 'nombre' }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    { obj: app.semantic.constructor.forms.field , 
+                                        content:[ 
+                                            { obj: app.semantic.constructor.forms.fields,
+                                                content:[
+                                                    { obj: app.semantic.constructor.label , html: 'apellidos' },
+                                                    { obj: app.semantic.constructor.forms.input.text ,name:'dos' , placeholder: 'apellidos' }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
-                        },
-                        css:'red big', 
-                    }  
-                },
-                two : { 
-                    append: { 
-                        obj: app.semantic.constructor.button.standard ,
-                        text:'hi 2',
-                        events:{
-                            click:function(){
-                                alert('hi 2')
-                            }
-                        } 
-                    }  
+                        ]
+                    }
+              //          { 
+              //                  obj: app.semantic.constructor.button.standard ,
+              //                  text:'hi 1',
+              //                  events:{
+              //                      click:function(){
+              //                          alert('hi 1')
+              //                      }
+              //                  },
+              //                  css:'red big' 
+                            
+              //          },
+              //          {append: { 
+              //                  obj: app.semantic.constructor.button.standard ,
+              //                  text:'hi 2',
+              //                  events:{
+              //                      click:function(){
+              //                          alert('hi 2')
+              //                      }
+              //                  } 
+              //              }  
+              //          },
+               //         {append: { 
+               //             obj: app.semantic.constructor.form ,
+               //             fields:[ 
+                //                { label: 'test' , obj: $('<input type="text">') }
+                 //           ] 
+                 //       }  
+                 //   }
+                    ]
                 }
-            }
+            
             
             app.semantic.html(UIMap)
 
