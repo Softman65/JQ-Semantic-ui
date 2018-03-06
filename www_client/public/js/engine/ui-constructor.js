@@ -13,15 +13,20 @@
                 }
                 return this
             },
-            complete:function(_this, _obj,_params,_css){
+            LoadDataExternal:function(url, _cb){
+                $.getJSON(url, function(_data){
+                    _cb(_data)
+                })
+            },
+            complete:function(_this, _obj,_params,_css, noEvents){
                 options._.forEach(_params,function(_e,_k){
-                    if(_k!='html' && _k!='content')
+                    if(_k!='html' && _k!='content'&& _k!='a' && _k!='div')
                        _obj.attr(_k,_e) 
                 })
-                if(_css.length>0)
-                    _obj.addClass(_css?_css.replace('+',' '):'')
+                if(_css && _css.length>0)
+                    _obj.addClass(_css)
 
-                if(_params!=null){
+                if(_params!=null && noEvents==null){
                     _obj.html(_params.html?_params.html:'')
                    if(_params.content!=null)
                         options._.forEach(_params.content,function(_elem){
@@ -38,13 +43,14 @@
                 var _func = ""
                 var _params = {}
                 var _events = null
+                var _itemEvents = null
                 var _css = ""
                // if(obj.fields){
                //     debugger
                // }else{
                     options._.forEach(_elem, function(_value,_name){
 
-                        if(_name!="events"){
+                        if(_name!="events" && _name!="itemEvents"){
                             if(_name=="obj"){
                                 _func = _value
                             }else{
@@ -55,14 +61,36 @@
                                 }
                             }
                         }else{
-                            _events = _value
+                            if( _name == "events")
+                                _events = _value
+                            if( _name == "itemEvents")
+                                _itemEvents = _value
                         }
                         
 
                     })
                // }
-                //if(_type=="append"){
-                    $parent.append(_this.atachEvents( _func(_this, _params, _css) , _events ))
+                if(_func !=null){
+                    console.log(_func)
+                    const _f = _func.split(".")
+                    var _xf = options.semantic.constructor
+                    options._.forEach(_f, function(_value){
+                        _xf = _xf[_value]
+                    }) 
+                    _func = _xf
+                    if(_func==null)
+                        debugger
+                    
+                }
+                if(_itemEvents == null){
+                    if(_events==null){
+                        $parent.append(_func(_this, _params, _css))
+                    }else{
+                        $parent.append(_this.atachEvents( _func(_this, _params, _css) , _events ))
+                    }
+                }else{
+                    $parent.append( _func(_this, _params, _css , _itemEvents ) )
+                }
                 //}
 
                 
@@ -80,8 +108,10 @@
                 })
             },
             atachEvents:function(object, events){
-                options._.forEach(events, function(_value,_name){
-                    object.bind(_name,_value)    
+                options._.forEach(events, function(_event){
+                    options._.forEach(_event, function(_f,_name){
+                        object.bind(_name,_f)  
+                    })  
                 })
                 return object
             },

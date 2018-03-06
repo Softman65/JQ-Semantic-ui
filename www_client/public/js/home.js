@@ -9,43 +9,71 @@ $( document ).ready(function() {
             const UIMap ={
                 body :[ 
                         { 
-                            obj: app.semantic.constructor.segment ,
-                            extracss: 'raised',
+                            obj: 'segment' ,
+                            css: 'raised',
                             content:[ 
-                                {   obj: app.semantic.constructor.forms.constructor,
+                                { obj:'h1' , css:'ui dividing header', html:'JQ SEMANTIC-UI EXAMPLES'},
+                                {   obj: 'forms.constructor',
                                     content:[
-                                        { obj:app.semantic.constructor.h4 , css:'ui dividing header', html:'Datos Personales'},
-                                        { obj: app.semantic.constructor.forms.field , 
+                                        { obj:'h4' , css:'ui dividing header', html:'Formularios'},
+                                        { obj: 'forms.field' , 
                                             content:[
-                                                { obj: app.semantic.constructor.label , html: 'nombre' }, 
-                                                { obj: app.semantic.constructor.forms.fields,
+                                                { obj: 'label' , html: 'nombre' }, 
+                                                { obj: 'forms.fields',
                                                     content:[
-                                                        { obj: app.semantic.constructor.forms.field , 
+                                                        { obj: 'forms.field' , 
                                                             content:[
-                                                                { obj: app.semantic.constructor.forms.input.text ,name:'uno' , placeholder: 'nombre' }
+                                                                { obj: 'forms.input.text' ,name:'Nombre' , placeholder: 'nombre' }
                                                             ]
                                                         },
-                                                        { obj: app.semantic.constructor.forms.field , 
+                                                        { obj: 'forms.field' , 
                                                             content:[
-                                                                { obj: app.semantic.constructor.forms.input.text ,name:'uno' , placeholder: 'nombre' }
+                                                                { obj: 'forms.input.text' ,name:'PrimerApellido' , placeholder: 'primer apellido' }
+                                                            ]
+                                                        },
+                                                        { obj: 'forms.field' , 
+                                                            content:[
+                                                                { obj: 'forms.input.text' ,name:'SegundoApellido' , placeholder: 'primer apellido' }
                                                             ]
                                                         }
                                                     ]
                                                 }
                                             ]
                                         },
-                                        { obj: app.semantic.constructor.forms.field , 
+                                        { obj: 'forms.field' , 
                                             content:[ 
-                                                { obj: app.semantic.constructor.forms.fields,
+                                                { obj: 'forms.fields',
                                                     content:[
-                                                        { obj: app.semantic.constructor.label , html: 'apellidos' },
-                                                        { obj: app.semantic.constructor.forms.input.text ,name:'dos' , placeholder: 'apellidos' }
+                                                        { obj: 'label' , html: 'Descripcion' },
+                                                        { obj: 'forms.input.text' ,name:'Descripcion' , placeholder: 'Descripcion' }
                                                     ]
                                                 }
                                             ]
+                                        },
+                                        { obj: 'forms.field' , 
+                                            content:[
+                                                    { obj : 'button.standard' , html:'go', events:[ { click:function(){ alert(); return false } }]},
+                                                    { obj : 'button.animated', css:'vertical', tabindex:0, 
+                                                        content:[
+                                                            { obj:'div', css: 'hidden content' ,html:'shop'  },
+                                                            { obj:'div', css:'visible content', content:[ {obj:'icon' ,css:'shop icon'} 
+                                                        ]
+                                                    }
+                                                ], events:[ { click:function(){ alert(); return false } }]}
+                                            ]
                                         }
                                     ]
-                                }
+                                },
+                                { obj:'h2' , css:'ui dividing header', html:'listas'},
+                                { obj:'divider.standard' },
+                                { obj:'list.constructor', url: 'API/getList' },
+                                { obj:'divider.standard' },
+                                { obj:'list.constructor', url: 'API/getListIcon' },
+                                { obj:'divider.standard' },
+                                { obj:'list.constructor', url: 'API/getListIconRelaxed', css:'relaxed divided', itemEvents:[ { click:function(){ 
+                                    alert($(this).attr('data')); return false } }]
+                                },
+                                { obj:'divider.standard' }
                             ]
                         }
 
