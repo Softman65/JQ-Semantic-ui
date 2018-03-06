@@ -71,7 +71,7 @@ $( document ).ready(function() {
                 }
 
 
-    $('body').semantic(UIMap)
+    $('body').html('').semantic(UIMap)
 
 
     

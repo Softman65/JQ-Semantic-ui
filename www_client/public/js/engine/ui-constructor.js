@@ -92,7 +92,7 @@
                     $parent.append( _func(_this, _params, _css , _itemEvents ) )
                 }
                 //}
-
+                return $parent
                 
             },
             html:function( _def ){
@@ -125,7 +125,7 @@
         const $parent = this
         _ret.iterator( _ret, _def , $parent )
  
-        return $parent
+        return _ret.iterator( _ret, _def , $parent )
     };
 
 }(jQuery));
