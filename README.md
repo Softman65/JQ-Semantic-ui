@@ -12,4 +12,6 @@ dependencias:
     <script src="js/engine/ui-constructor.js"></script>
 
 para crear un entorno:
-* ```    <script src="js/plugins/jquery/jquery-3.3.1.min.js"></script>
+```[javascript]    
+    
+    semantic = $('body').semantic(app)

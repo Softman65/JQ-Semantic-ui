@@ -1,7 +1,7 @@
 (function ($) {
     
    // debugger
-    $.fn.UI_html = function (options) {
+    $.fn.UI_html = function () {
         //debugger
         return {
             a:function(semantic, params, css){
@@ -57,7 +57,7 @@
                     //debugger
                     //const $fields = $('<div class="fields">')
                     if(params.content){
-                        const counter = options._.countBy(params.content, function(o) { 
+                        const counter = _.countBy(params.content, function(o) { 
                             return o.placeholder !=null });
                         //debugger
                         return  semantic.complete(semantic, $('<div class="'+semantic.ordinals[counter.true]+' fields">'), params,css)
@@ -82,7 +82,7 @@
                         $item.append( $('<i class="icon">').addClass(element.icon))
                         if(element.a){
                             const $content=$('<div class="content">')
-                            options._.forEach(element.a, function(_v){
+                            _.forEach(element.a, function(_v){
 
                                 var $link = {}
                                 if(_v.a){
@@ -117,7 +117,7 @@
                     var $list = $('<div class="ui list">')
                     if(params.url){
                         semantic.LoadDataExternal(params.url, function(_data){
-                            options._.forEach(_data, function(element) {
+                            _.forEach(_data, function(element) {
                                 $list =  semantic.constructor.list.item(semantic, $list, element, events )
                             });
                         })

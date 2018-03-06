@@ -1,10 +1,10 @@
 (function ($) {
     
-    $.fn.semantic = function (options, _key) {
-
+    $.fn.semantic = function (_def , _key) {
+        //debugger
         const _ret = {
             ordinals:['cero','one','two','three','four','five','six','seven'],
-            constructor: $(this).UI_html(options),
+            
             push:function(obj, _key){
                 if(options._.isString(obj)){
                     this.objects[obj] = $(obj)
@@ -19,7 +19,7 @@
                 })
             },
             complete:function(_this, _obj,_params,_css, noEvents){
-                options._.forEach(_params,function(_e,_k){
+                _.forEach(_params,function(_e,_k){
                     if(_k!='html' && _k!='content'&& _k!='a' && _k!='div')
                        _obj.attr(_k,_e) 
                 })
@@ -29,7 +29,7 @@
                 if(_params!=null && noEvents==null){
                     _obj.html(_params.html?_params.html:'')
                    if(_params.content!=null)
-                        options._.forEach(_params.content,function(_elem){
+                        _.forEach(_params.content,function(_elem){
                             _this.iterator(_this,_elem, _obj )
                         })
                 }
@@ -48,7 +48,7 @@
                // if(obj.fields){
                //     debugger
                // }else{
-                    options._.forEach(_elem, function(_value,_name){
+                    _.forEach(_elem, function(_value,_name){
 
                         if(_name!="events" && _name!="itemEvents"){
                             if(_name=="obj"){
@@ -73,8 +73,8 @@
                 if(_func !=null){
                     console.log(_func)
                     const _f = _func.split(".")
-                    var _xf = options.semantic.constructor
-                    options._.forEach(_f, function(_value){
+                    var _xf = _this.constructor
+                    _.forEach(_f, function(_value){
                         _xf = _xf[_value]
                     }) 
                     _func = _xf
@@ -97,10 +97,10 @@
             },
             html:function( _def ){
                 const _this = this  
-                options._.forEach(_def, function(_array,_name){ 
+                _.forEach(_def, function(_array,_name){ 
                     const $parent = _this.objects[_name].empty()  
-                    options._.forEach(_array, function(_elem){              
-                        //options._.forEach(_elem, function(_v,_k){
+                    _.forEach(_array, function(_elem){              
+                        //_.forEach(_elem, function(_v,_k){
                            
                             _this.iterator( _this, _elem , $parent )
                         //})
@@ -108,8 +108,8 @@
                 })
             },
             atachEvents:function(object, events){
-                options._.forEach(events, function(_event){
-                    options._.forEach(_event, function(_f,_name){
+                _.forEach(events, function(_event){
+                    _.forEach(_event, function(_f,_name){
                         object.bind(_name,_f)  
                     })  
                 })
@@ -120,7 +120,12 @@
             }
         }
         
-        return _ret.push( this[0].id.length==0 ? 'body' : this )
+        _ret.constructor= $(this).UI_html(_ret)
+
+        const $parent = this
+        _ret.iterator( _ret, _def , $parent )
+ 
+        return $parent
     };
 
 }(jQuery));
